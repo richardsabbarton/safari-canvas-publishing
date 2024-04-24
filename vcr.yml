@@ -1,10 +1,10 @@
 project:
-  name: vcr-hello-world
+  name: safari-canvas-publishing
 instance:
   name: dev
   runtime: nodejs16
   region: aws.euw1
-  application-id: YOUR-VONAGE-API-APPLICATION-ID
+  application-id: 86716d18-cb6f-4863-b6c7-0a011bc33fa9
   entrypoint: [node, server.js]
   environment:
     - name: YOURVAR1
@@ -13,4 +13,4 @@ instance:
       value: "string value"
 debug:
   name: debug
-  entrypoint: [sh, debug.sh]
+  entrypoint: [node, server.js]
