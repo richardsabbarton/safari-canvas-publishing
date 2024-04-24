@@ -13,8 +13,22 @@ class App {
         })
 
         document.getElementById("capturebutton").onclick = ()=>{
-            this.captureScreenToCanvas()
+            //this.captureScreenToCanvas()
+            this.renderStaticImageToCanvas()
+            this.videoController.publishCanvas(this.canvas)
         }
+
+        this.imageArray = new Array()
+
+        let img1 = new Image()
+        img1.src = "/images/img1.png"
+        this.imageArray.push(img1)
+        
+        let img2 = new Image()
+        img2.src = "/images/img2.png"
+        this.imageArray.push(img2)
+
+        this.currentImage = 0
     }
 
     captureScreenToCanvas(){
@@ -53,6 +67,20 @@ class App {
         setTimeout(()=>{this.captureFrame();}, 1000/1)
     }
 
+    renderStaticImageToCanvas(){
+
+        this.canvas.width = 1280
+        this.canvas.height = 720
+        let ctx = this.canvas.getContext("2d")
+        ctx.drawImage(this.imageArray[this.currentImage], 0,0,1280, 720)
+        
+        this.currentImage++
+        if(this.currentImage >= this.imageArray.length){
+            this.currentImage = 0
+        }
+        
+        setTimeout(()=>{this.renderStaticImageToCanvas()}, 3000)
+    }
 }
 
 

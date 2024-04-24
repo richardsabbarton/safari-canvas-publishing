@@ -2,3 +2,10 @@
     width: 1280px;
     height: 720px;
 }
+
+
+#subscriber {
+    width: 1280px;
+    height: 720px;
+    display: none;
+}

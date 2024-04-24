@@ -6,6 +6,7 @@ class VideoController {
         this.apiKey = "47807831"
         this.token = false
         this.sessionId = false
+        this.subscribers = new Array()
     }
 
     connect(room){
@@ -46,6 +47,17 @@ class VideoController {
                     resolve(this.session)
                 }
             })
+
+            this.session.on("streamCreated", (event)=>{
+                const subscriberOptions = {
+                    width: 1280,
+                    height: 720,
+                    //preferredResolution: {width: 1280, height: 720},
+                }
+                let subscriber = this.session.subscribe(event.stream, "subscriber", subscriberOptions)
+                //this.subscribers.push(subscriber)
+                document.getElementById("subscriber").style.display = "block"
+            })
         })
             
 
@@ -58,13 +70,16 @@ class VideoController {
             audioSource: null,      // no audio
             publishAudio: false,
             videoContentHint: "text",   // prefer resolution over framerate
-            // capture canvas at 1 fps
-            videoSource: canvas.captureStream(1).getVideoTracks()[0]
+            videoSource: canvas.captureStream(30).getVideoTracks()[0]
         }
-        this.publisher = OT.initPublisher("null", publisherOptions)
+        this.publisher = OT.initPublisher(null, publisherOptions)
         // for easy console access
         window.publisher = this.publisher
         this.session.publish(this.publisher)
+    }
+
+    subscribe(){
+
     }
 }
 
