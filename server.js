@@ -12,7 +12,7 @@ const state = neru.getInstanceState()
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.redirect('/app.html?roomName=safari-canvas-testing')
+  res.redirect('/index.html?roomName=safari-canvas-testing')
 })
 
 
